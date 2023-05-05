@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:client_code_generators/src/code/dart-http/config.dart';
 import 'package:client_code_generators/src/shared/body.interface.dart';
 import 'package:client_code_generators/src/shared/convert.interface.dart';
@@ -14,13 +12,14 @@ class ConvertTemplate implements IConvert {
   @override
   dynamic convert(request, Map<String, dynamic> options,
       void Function(dynamic error, dynamic snippet) callback) {
-    var indent,
+    var indent = '',
         codeSnippet = '',
         headerSnippet = '',
         footerSnippet = '',
-        trim,
-        timeout,
-        followRedirect,
+        trim = false,
+        timeout = 0,
+        followRedirect = false,
+        // ignore: prefer_typing_uninitialized_variables
         contentType;
     var optionsRequest = sanitizeOptions(options, getOptions());
 
@@ -30,7 +29,7 @@ class ConvertTemplate implements IConvert {
     timeout = optionsRequest['requestTimeout'];
     followRedirect = optionsRequest['followRedirect'];
 
-    if (!isFunction(callback as Function)) {
+    if (!isFunction(callback)) {
       throw ArgumentError('callback is not a function');
     }
 
@@ -67,7 +66,7 @@ class ConvertTemplate implements IConvert {
         request.bodyFields['mode'] == 'formdata') {
       List<dynamic> formdata = request.bodyFields['formdata'];
       List<Map<String, dynamic>> formdataArray = [];
-      formdata.forEach((param) {
+      for (var param in formdata) {
         String key = param['key'];
         String type = param['type'];
         bool disabled = param['disabled'] ?? false;
@@ -100,7 +99,7 @@ class ConvertTemplate implements IConvert {
           addFormParam(
               formdataArray, key, type, param['value'], disabled, contentType);
         }
-      });
+      }
       request.bodyFields
           .update({'mode': 'formdata', 'formdata': formdataArray});
     }
@@ -143,9 +142,7 @@ class ConvertTemplate implements IConvert {
     codeSnippet += '}\n';
 
     if (optionsRequest['includeBoilerplate']) {
-      codeSnippet = (indent.toString() +
-          codeSnippet.split('\n').join('\n' + indent.toString()) +
-          '\n');
+      codeSnippet = ('$indent${codeSnippet.split('\n').join('\n$indent')}\n');
     }
 
     callback(null, headerSnippet + codeSnippet + footerSnippet);
@@ -176,8 +173,7 @@ List<Map<String, dynamic>> getOptions() {
       'type': 'positiveInteger',
       'default': 0,
       'description':
-          'Set number of milliseconds the request should wait for a response' +
-              ' before timing out (use 0 for infinity)'
+          'Set number of milliseconds the request should wait for a response' ' before timing out (use 0 for infinity)'
     },
     {
       'name': 'Trim request body fields',

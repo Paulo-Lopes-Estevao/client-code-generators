@@ -17,10 +17,7 @@ void main() {
         {'key': 'Authorization', 'value': 'Bearer my-token', 'disabled': true},
         {'key': 'X-Custom-Header', 'value': 'custom-value', 'disabled': false},
       ];
-      final expectedOutput = 'var headers = {\n' +
-          '    \'Content-Type\': \'application/json\',\n' +
-          '    \'X-Custom-Header\': \'custom-value\'\n' +
-          '};\n';
+      final expectedOutput = 'var headers = {\n    \'Content-Type\': \'application/json\',\n    \'X-Custom-Header\': \'custom-value\'\n};\n';
       final result = header.parseHeaders(headers, true);
       expect(result, expectedOutput);
     });

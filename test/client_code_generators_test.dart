@@ -20,7 +20,6 @@ void main() {
     var variant = 'http';
     
     convert(language, variant, request, options, (error, snippet) {
-      print(snippet);
       expect(snippet, isNotNull);
     });
   });

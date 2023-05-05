@@ -42,7 +42,7 @@ class Request extends RequestBase {
 class RequestBase {
   final String url;
   final String method;
-  static Map<String, dynamic> _bodyFields = <String, dynamic>{};
+  Map<String, dynamic> bodyFields = <String, dynamic>{};
   static List<Map<String, Object>> _headers = <Map<String, Object>>[];
 
   RequestBase(
@@ -50,18 +50,12 @@ class RequestBase {
      this.url,
   );
 
-   void set bodyFields(Map<String, dynamic> fields) {
-      _bodyFields = fields;
-   }
-
-  Map<String, dynamic> get bodyFields {
-    return _bodyFields;
-  }
-
-  void set header(List<Map<String, Object>> fields){
+  set header(List<Map<String, Object>> fields){
     _headers = fields;
   }
 
+
+  // ignore: unnecessary_getters_setters
   List<Map<String, Object>> get header {
     return _headers;
   }

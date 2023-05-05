@@ -4,17 +4,18 @@ import 'package:client_code_generators/src/lib/request.dart';
 
 void convert(language, variant, request, options, void Function(String?, String?) callback) {
 
+  // ignore: prefer_typing_uninitialized_variables
   var convert;
 
   if (request is! Request) {
     return callback('Codegen~convert: Invalid request', null);
   }
 
-  languageMap.forEach((element) {
+  for (var element in languageMap) {
     if (element['lang'] == language && element['variant'] == variant) {
       convert = element['convert'];
     }
-  });
+  }
 
   if (options is! Map<String, dynamic>) {
     return callback('Codegen~convert: Invalid options', null);

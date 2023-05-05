@@ -61,6 +61,7 @@ String sanitize(inputString, {bool trim = false}) {
 }
 
 bool isFunction(Function func) {
+  // ignore: unnecessary_type_check
   return func is Function;
 }
 
@@ -74,8 +75,7 @@ Map sanitizeOptions(
     Map<String, dynamic> options, List<Map<String, dynamic>> optionsArray) {
   var result = {};
   var defaultOptions = {};
-  var id;
-  optionsArray.forEach((option) {
+  for (var option in optionsArray) {
     defaultOptions[option['id']] = {
       'default': option['default'],
       'type': option['type']
@@ -84,7 +84,7 @@ Map sanitizeOptions(
       defaultOptions[option['id']]['availableOptions'] =
           option['availableOptions'];
     }
-  });
+  }
 
   options.forEach((id, value) {
     if (defaultOptions[id] == null) {
