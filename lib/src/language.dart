@@ -1,6 +1,6 @@
 
 
-import 'package:client_code_generators/src/code/dart-http/dartHttpLanguageMap.dart';
+import 'package:client_code_generators/src/code/dart-http/dart_http_language_map.dart';
 
 var languageMap =  [
   dartHttpLanguageMap,
