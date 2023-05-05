@@ -1,5 +1,5 @@
 name: client_code_generators
-description: A sample command-line application.
+description: Converts HTTP requests into different languages of your choice, generating HTTP request code for the same language.
 version: 0.1.0
 repository: https://github.com/Paulo-Lopes-Estevao/client-code-generators
 
