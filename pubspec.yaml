@@ -1,6 +1,6 @@
 name: client_code_generators
 description: Converts HTTP requests into different languages of your choice, generating HTTP request code for the same language.
-version: 0.1.1
+version: 0.2.0
 repository: https://github.com/Paulo-Lopes-Estevao/client-code-generators
 
 topics:
