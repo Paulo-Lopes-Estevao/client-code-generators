@@ -18,7 +18,7 @@ class RequestBody {
 }
 
 class Request extends RequestBase {
-  Request(super.method, super.url);
+  Request(method, url) : super(method, url);
 
   Future<RequestBase> requestBody({
     RequestBody? body,
