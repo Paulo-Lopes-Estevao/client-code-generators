@@ -16,14 +16,14 @@ It is a package written in dart based on Postman's [postman-code-generators](htt
 <br/>
 
 List of supported code generators:
-language | variant
+|language | variant|
 --- | ---
 `Dart` | `http`
 
 <br/>
 
 List of supported options:
-option | type | description
+|option | type | description|
 --- | --- | ---
 `trimRequestBody` | `boolean` | Whether to trim request body fields
 `indentType` | `string` | The type of indentation to be used in the generated code snippet. Can be `Tab` or `Space`
@@ -41,13 +41,13 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  client_code_generators: ^0.1.0
+  client_code_generators: ^0.2.0
 ```
 
 You can install packages from the command line:
 
 ```bash
-$ pub get
+$ dart pub get
 ```
 
 
