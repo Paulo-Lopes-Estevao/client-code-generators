@@ -32,6 +32,31 @@ class DataBody implements IBody {
     return "request.body = '''${sanitize(body, trim: trim)}''';";
   }
 
+  /// Parses Url encoded data
+  ///
+  /// @param {Object} body body data
+  /// 
+  /// @param {String} indent indentation required for code snippet
+  /// 
+  /// @param {Boolean} trim indicates whether to trim string or not
+  @override
+  String parseUrlEncoded(Map<String, dynamic> body, String indent, bool trim) {
+    String bodySnippet = 'request.bodyFields = {';
+  List<Map<String, dynamic>> enabledBodyList = reject(body, 'disabled');
+  List<String> bodyDataMap;
+
+  if (enabledBodyList.isNotEmpty) {
+    bodyDataMap = enabledBodyList.map((value) {
+      return '$indent\'${sanitize(value['key'], trim: trim)}\': \'${sanitize(value['value'], trim: trim)}\'';
+    }).toList();
+
+    bodySnippet += '\n${bodyDataMap.join(',\n')}\n';
+  }
+
+  bodySnippet += '};';
+  return bodySnippet;
+  }
+
   /// Parses Body from the Request
   ///
   /// @param {Object} body body object from request.
@@ -44,6 +69,8 @@ class DataBody implements IBody {
       switch (body['mode']) {
         case "raw":
           return parseRawBody(body['raw'], contentType, trim, indent);
+        case "urlencoded":
+          return parseUrlEncoded(body['urlencoded'], ' ' * indent, trim);
         default:
           return "";
       }
