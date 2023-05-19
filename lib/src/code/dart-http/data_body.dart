@@ -39,7 +39,7 @@ class DataBody implements IBody {
   /// 
   /// @param {Boolean} trim indicates whether to trim string or not
   @override
-  String parseUrlEncoded(Map<String, dynamic> body, String indent, bool trim) {
+  String parseUrlEncoded(body, String indent, bool trim) {
     String bodySnippet = 'request.bodyFields = {';
   List<Map<String, dynamic>> enabledBodyList = reject(body, 'disabled');
   List<String> bodyDataMap;
