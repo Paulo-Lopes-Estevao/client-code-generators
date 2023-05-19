@@ -34,26 +34,32 @@ class DataBody implements IBody {
   /// Parses Url encoded data
   ///
   /// @param {Object} body body data
-  /// 
+  ///
   /// @param {String} indent indentation required for code snippet
-  /// 
+  ///
   /// @param {Boolean} trim indicates whether to trim string or not
   @override
   String parseUrlEncoded(body, String indent, bool trim) {
-    String bodySnippet = 'request.bodyFields = {';
-  List<Map<String, dynamic>> enabledBodyList = reject(body, 'disabled');
-  List<String> bodyDataMap;
+    try {
+      String bodySnippet = 'request.bodyFields = {';
+      List<Map<String, dynamic>> enabledBodyList = reject(body, 'disabled');
+      List<String> bodyDataMap;
 
-  if (enabledBodyList.isNotEmpty) {
-    bodyDataMap = enabledBodyList.map((value) {
-      return '$indent\'${sanitize(value['key'], trim: trim)}\': \'${sanitize(value['value'], trim: trim)}\'';
-    }).toList();
+      if (enabledBodyList.isNotEmpty) {
+        bodyDataMap = enabledBodyList.map((value) {
+          return '$indent\'${sanitize(value['key'], trim: trim)}\': \'${sanitize(value['value'], trim: trim)}\'';
+        }).toList();
 
-    bodySnippet += '\n${bodyDataMap.join(',\n')}\n';
-  }
+        bodySnippet += '\n${bodyDataMap.join(',\n')}\n';
+      }
 
-  bodySnippet += '};';
-  return bodySnippet;
+      bodySnippet += '};';
+      return bodySnippet;
+    } catch (e) {
+      print(e);
+    }
+
+    return '';
   }
 
   /// Parses Body from the Request
