@@ -22,7 +22,6 @@ class DataBody implements IBody {
         JsonEncoder encoder = JsonEncoder.withIndent(' ' * indentCount);
         var encodedJsonBody = encoder.convert(body);
         var jsonBody = jsonDecode(encodedJsonBody);
-        print(jsonBody);
         return 'request.body = json.encode($jsonBody);';
       }
     } catch (e) {
