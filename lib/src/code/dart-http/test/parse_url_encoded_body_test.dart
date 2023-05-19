@@ -16,4 +16,16 @@ void main() {
     expect(raw, 'request.bodyFields = {\n  \'name\': \'body\'\n};');
   });
 
+  test('should use parse url encoded body disabled true', () {
+    var body = {
+      "mode": "urlencoded",
+      "urlencoded": [
+        {"key": "name", "value": "body", "disabled": true}
+      ]
+    };
+    var contentType = 'application/x-www-form-urlencoded';
+    var raw = dataBody.parseBody(body, contentType, false, 2);
+    expect(raw, 'request.bodyFields = {};');
+  });
+
 }
