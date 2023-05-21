@@ -28,4 +28,18 @@ void main() {
             {"userId": 1000, "id": 10, "title": "jogo", "body": "SONIC"}));
     expect(requestBody.bodyFields, {'userId': '1000', 'id': '10', 'title': 'jogo', 'body': 'SONIC'});
   });
+
+  test('request POST body parse urlencoded mode urlencoded', () async {
+    final request = Request(
+        'POST', 'https://jsonplaceholder.typicode.com/users');
+    final requestBody = await request.requestBody(
+        body: RequestBody.fields({
+      "mode": "urlencoded",
+      "urlencoded": [
+        {"key": "name", "value": "body", "disabled": false}
+      ]
+    }));
+    expect(requestBody.bodyFields["urlencoded"], [{'key': 'name', 'value': 'body', 'disabled': false}]);
+  });
+
 }
