@@ -146,3 +146,17 @@ void addFormParam(List array, String key, String type, String val,
     });
   }
 }
+
+List<Map<String, dynamic>> reject(dynamic array, String predicate) {
+  List<Map<String, dynamic>> res = [];
+  for (var object in array) {
+    if (!object.containsKey(predicate) || !object[predicate]) {
+      res.add(object);
+    }
+  }
+  return res;
+}
+
+List<T> map<T>(List<T> array, T Function(T) iteratee) {
+  return array.map(iteratee).toList();
+}

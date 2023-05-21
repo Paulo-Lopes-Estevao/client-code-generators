@@ -55,4 +55,34 @@ void main() {
       expect(snippet, isNotNull);
     });
   });
+
+  test('request POST convert template urlencoded', () async {
+    var request = Request('POST', 'https://jsonplaceholder.typicode.com/users');
+    final headers = [
+      {'key': 'Content-Type', 'value': 'application/x-www-form-urlencoded', 'disabled': false},
+    ];
+    var requestbody = await request.requestBody(
+        header: headers,
+        body: RequestBody.fields({
+          "mode": "urlencoded",
+          "urlencoded": [
+            {"key": "id", "value": "2", "disabled": false},
+            {"key": "name", "value": "Paulo Lopes Estevão", "disabled": false}
+          ]
+        }));
+
+    ConvertTemplate convertTemplate = ConvertTemplate(DataBody(), Headers());
+    var options = {
+      'trimRequestBody': true,
+      'indentType': 'Space',
+      'indentCount': 4,
+      'requestTimeout': 0,
+      'followRedirect': true,
+      'includeBoilerplate': true
+    };
+    convertTemplate.convert(requestbody, options, (error, snippet) {
+      print(snippet);
+      expect(snippet, isNotNull);
+    });
+  });
 }

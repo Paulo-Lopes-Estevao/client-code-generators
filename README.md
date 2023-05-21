@@ -32,6 +32,19 @@ List of supported options:
 `followRedirect` | `boolean` | Whether to follow redirects for the request
 `includeBoilerplate` | `boolean` | Whether to include boilerplate code for the snippet
 
+<br/>
+
+List of supported body types:
+|type | description| content-type|
+--- | --- | ---
+`raw` | Raw json data | `application/json`
+`urlencoded` | URL encoded form data | `application/x-www-form-urlencoded`
+`formdata` | Multipart form data | `multipart/form-data`
+`file` | File data | `multipart/form-data`
+`graphql` | GraphQL query | `application/graphql`
+`none` | No body | `none`
+
+<br/>
 
 Getting Started
 
@@ -41,7 +54,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  client_code_generators: ^0.2.0
+  client_code_generators: ^0.3.0
 ```
 
 You can install packages from the command line:

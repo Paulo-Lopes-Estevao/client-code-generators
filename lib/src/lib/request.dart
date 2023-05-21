@@ -7,12 +7,32 @@ class RequestBody {
 
   RequestBody.fields(Map<String, dynamic> fields) : _fields = fields;
 
+  RequestBody.urlencoded(List<Map<String, dynamic>> urlencoded) : _fields = {'mode': 'urlencoded', 'urlencoded': urlencoded};
+
+  List<Map<String, dynamic>> _urlEncode(List<dynamic> list) {
+    return list.map((value) {
+      return {
+        'key': value['key'],
+        'value': value['value'],
+        'disabled': value['disabled'] ?? false
+      };
+    }).toList();
+  }
+
   Map<String, dynamic> toMap() {
     return _fields.map((key, value) {
+      
       if (key == 'raw' && value is Map) {
         value = jsonEncode(value);
+        return MapEntry(key, value.toString());
       }
-      return MapEntry(key, value.toString());
+      
+      if (key == 'urlencoded' && value is List) {
+        value = _urlEncode(value);
+        return MapEntry(key, value);
+      }
+
+        return MapEntry(key, value.toString());
     });
   }
 }
