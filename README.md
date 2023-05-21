@@ -32,6 +32,19 @@ List of supported options:
 `followRedirect` | `boolean` | Whether to follow redirects for the request
 `includeBoilerplate` | `boolean` | Whether to include boilerplate code for the snippet
 
+<br/>
+
+List of supported body types:
+|type | description|
+--- | ---
+`raw` | Raw text
+`urlencoded` | URL encoded form data
+`formdata` | Multipart form data
+`file` | File
+`graphql` | GraphQL
+`none` | No body
+
+<br/>
 
 Getting Started
 
