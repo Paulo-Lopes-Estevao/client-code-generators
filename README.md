@@ -35,14 +35,14 @@ List of supported options:
 <br/>
 
 List of supported body types:
-|type | description|
---- | ---
-`raw` | Raw text
-`urlencoded` | URL encoded form data
-`formdata` | Multipart form data
-`file` | File
-`graphql` | GraphQL
-`none` | No body
+|type | description| content-type|
+--- | --- | ---
+`raw` | Raw json data | `application/json`
+`urlencoded` | URL encoded form data | `application/x-www-form-urlencoded`
+`formdata` | Multipart form data | `multipart/form-data`
+`file` | File data | `multipart/form-data`
+`graphql` | GraphQL query | `application/graphql`
+`none` | No body | `none`
 
 <br/>
 
